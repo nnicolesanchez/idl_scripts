@@ -1,0 +1,29 @@
+pro adot,doprint=doprint
+
+n = 9000
+
+a = (findgen(n)+1.)/n
+z = 1./a - 1.
+time = wmap3_lookback(z)
+time = reverse(time)/1d9
+
+hubble = wmap3_hubble(z)
+
+adot = hubble*a
+
+!p.multi=[0,1,2]
+ 
+plot,time,a,xtit='time',ytit='a'
+
+plot,time,adot,xtit='time',ytit='adot',yra=[0,1000];/ylog
+
+if keyword_set(doprint) then begin
+    openw,lun,'adot.dat',/get_lun
+    printf,lun,'  a        adot '
+    for i=0,n-1 do printf,lun,a[i],adot[i]
+    close,lun
+    free_lun,lun
+endif
+
+
+end

@@ -1,0 +1,7 @@
+;Finds the BH closest to the center of halo 1 for /astro1/nicole/otherh277/bhhalo.sav
+
+pro h277centralbh,bhhalofile
+
+restore,bhhalofile+.sav
+help,bhhalo
+

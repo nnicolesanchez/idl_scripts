@@ -1,0 +1,14 @@
+pro timelist
+
+
+
+readcol,'gasfraction.dat',coldmass,clumpymass,shockedmass,earlymass,format='d',/silent
+
+for i=1,nfiles-1 do begin
+   readcol,haloidfile[0],file,haloid,format='a,i',/silentrtipsy,file[i],h,g,d,s
+
+openw,lun,'timelist.dat',/get_lun,width=500
+printf,lun,'File Name                        ','Redshift ','Years ','Number '
+for i=0,nfiles-1 do printf,lun,coldmass[i],clumpymass[i],shockedmass[i],earlymass[i]
+close,lun
+free_lun,lun
